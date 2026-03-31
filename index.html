@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali+ Club - Descontos Reais e Prêmios Incríveis</title>
+    <meta name="description" content="Faça parte do Ali+ Club por apenas R$ 19,90 mensais. Economize nas suas lojas favoritas e concorra a sorteios exclusivos.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ================================================== -->
+    <!-- META PIXEL (Facebook) - DESCOMENTE E CONFIGURE     -->
+    <!-- ================================================== -->
+    <!--
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'SEU_PIXEL_ID_AQUI');
+        fbq('track', 'PageView');
+    </script>
+    -->
+
+    <!-- ================================================== -->
+    <!-- GOOGLE ANALYTICS 4 - DESCOMENTE E CONFIGURE        -->
+    <!-- ================================================== -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
+
+    <style>
+        /* ============================================
+           VARIÁVEIS DE TEMA - PERSONALIZE AQUI
+           ============================================ */
+        :root {
+            --primary:    #00CBC0;
+            --secondary:  #005A9E;
+            --accent:     #FFD700;
+            --bg:         #FFF8F0;
+            --dark:       #1A1A2E;
+            --white:      #ffffff;
+            --radius:     20px;
+            --shadow:     0 8px 32px rgba(0,0,0,0.12);
+            --transition: all 0.35s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; }
+        img { max-width: 100%; }
+
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 9999;
+            transition: box-shadow 0.3s;
+        }
+        .navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 2rem;
+        }
+        .logo {
+            font-size: 1.6rem; font-weight: 800;
+            color: var(--primary); letter-spacing: -0.5px;
+        }
+        .logo em { color: var(--secondary); font-style: normal; }
+        .nav-links {
+            display: flex; list-style: none; gap: 1.8rem;
+        }
+        .nav-links a {
+            color: var(--dark); font-weight: 600; font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white); padding: 0.55rem 1.4rem;
+            border-radius: 50px; font-weight: 700; font-size: 0.95rem;
+            transition: var(--transition);
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+        .btn-nav:hover { opacity: 0.88; transform: scale(1.05); }
+        .hamburger {
+            display: none; flex-direction: column;
+            gap: 5px; cursor: pointer; padding: 4px;
+        }
+        .hamburger span {
+            display: block; width: 26px; height: 3px;
+            background: var(--dark); border-radius: 2px;
+            transition: var(--transition);
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        .mobile-menu {
+            display: none; flex-direction: column;
+            background: var(--white); padding: 1.5rem 2rem;
+            border-top: 1px solid #f0e8e0;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: var(--dark); font-weight: 600;
+            padding: 0.6rem 0; border-bottom: 1px solid #f0e8e0;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        #hero {
+            position: relative; min-height: 100vh;
+            background: linear-gradient(135deg, 
+                var(--primary) 0%, 
+                #0094B1 50%, 
+                var(--secondary) 100%
+            );
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; padding-top: 80px;
+        }
+        #confetti-canvas {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
+        }
+        .hero-content {
+            position: relative; z-index: 5;
+            text-align: center; color: var(--white);
+            max-width: 800px; padding: 2rem;
+        }
+        .mascot-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+        }
+
+        .mascot-img {
+            width: 320px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            animation: mascotPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-18px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes mascotPulse {
+            0%   { filter: drop-shadow(0 0 10px rgba(0, 200, 180, 0.3)); }
+            50%  { filter: drop-shadow(0 0 28px rgba(0, 200, 180, 0.8)); }
+            100% { filter: drop-shadow(0 0 10px rgba(0, 200, 180, 0.3)); }
+        }
+        .hero-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800; line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2rem; opacity: 0.93;
+            font-weight: 600;
+        }
+        .btn-hero {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.25rem; font-weight: 800;
+            box-shadow: 0 6px 24px rgba(255,215,0,0.45);
+            animation: pulse 2s ease-in-out infinite;
+            transition: var(--transition);
+            margin-bottom: 2.5rem;
+        }
+        .btn-hero:hover { transform: scale(1.07); box-shadow: 0 10px 32px rgba(255,215,0,0.6); }
+        .hero-badges {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 1rem;
+        }
+        .hero-badge {
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: var(--white); padding: 0.6rem 1.2rem;
+            border-radius: 50px; font-weight: 700;
+            font-size: 0.95rem;
+            animation: float 3.5s ease-in-out infinite;
+        }
+        /* Logo na navbar */
+        .logo {
+            background: transparent !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 48px;          /* Altura fixa — ajuste esse número se quiser maior ou menor */
+            width: auto;           /* Largura proporcional automática */
+            object-fit: contain;
+            background: transparent !important;
+            mix-blend-mode: normal;
+        }
+        .hero-badge:nth-child(2) { animation-delay: 0.5s; }
+        .hero-badge:nth-child(3) { animation-delay: 1s; }
+
+        /* ============================================
+           SECTION SHARED STYLES
+           ============================================ */
+        .section-wrap {
+            max-width: 1200px; margin: 0 auto; padding: 5rem 2rem;
+        }
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800; text-align: center;
+            margin-bottom: 0.75rem; color: var(--dark);
+        }
+        .section-sub {
+            text-align: center; font-size: 1.05rem;
+            color: #666; margin-bottom: 3rem;
+        }
+
+        /* ============================================
+           COMO FUNCIONA
+           ============================================ */
+        #how-it-works { background: var(--white); }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+            gap: 2rem;
+        }
+        .step-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .step-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        .step-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.14); }
+        .step-num {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white); font-size: 1.5rem; font-weight: 900;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.2rem;
+            box-shadow: 0 4px 15px rgba(108,63,197,0.4);
+        }
+        .step-icon-wrap {
+            width: 90px; height: 90px; margin: 0 auto 1.2rem;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(255,107,0,0.12), rgba(108,63,197,0.12));
+        }
+        .step-card h3 {
+            font-size: 1.2rem; font-weight: 800;
+            color: var(--primary); margin-bottom: 0.7rem;
+        }
+        .step-card p { color: #555; font-size: 0.97rem; }
+
+        /* ============================================
+           PARCEIROS - CARROSSEL INFINITO
+           ============================================ */
+        #partners { background: var(--dark); }
+        #partners .section-title { color: var(--white); }
+        #partners .section-sub { color: #aaa; }
+        .carousel-outer { overflow: hidden; position: relative; }
+        .carousel-outer::before,
+        .carousel-outer::after {
+            content: '';
+            position: absolute; top: 0; bottom: 0; width: 80px;
+            z-index: 2;
+        }
+        .carousel-outer::before {
+            left: 0;
+            background: linear-gradient(to right, var(--dark), transparent);
+        }
+        .carousel-outer::after {
+            right: 0;
+            background: linear-gradient(to left, var(--dark), transparent);
+        }
+        .carousel-track {
+            display: flex;
+            animation: carousel-scroll 28s linear infinite;
+            width: max-content;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes carousel-scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .partner-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            margin: 0 0.8rem;
+            min-width: 170px; text-align: center;
+            font-weight: 700; font-size: 0.95rem;
+            color: var(--dark);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        /* ===== TEAM IMAGE COM ANIMAÇÕES ===== */
+        .team-img-wrapper {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .team-img {
+            width: 280px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            background: transparent;
+            position: relative;
+            z-index: 2;
+
+            filter: drop-shadow(0 0 18px rgba(108, 63, 197, 0.55))
+                    drop-shadow(0 0 40px rgba(255, 215, 0, 0.25));
+
+            animation: teamFloat 4s ease-in-out infinite;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .team-img-wrapper:hover .team-img {
+            transform: scale(1.06) translateY(-6px);
+            filter: drop-shadow(0 0 28px rgba(108, 63, 197, 0.85))
+                    drop-shadow(0 0 55px rgba(255, 215, 0, 0.5));
+        }
+
+        @keyframes teamFloat {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-14px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ===== ÓRBITA DOS ÍCONES ===== */
+        .orbit {
+            position: absolute;
+            font-size: 1.4rem;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+        }
+
+        .orbit-1 { animation: orbitFull 6s linear infinite 0s; }
+        .orbit-2 { animation: orbitFull 6s linear infinite -1.5s; }
+        .orbit-3 { animation: orbitFull 6s linear infinite -3s; }
+        .orbit-4 { animation: orbitFull 6s linear infinite -4.5s; }
+
+        @keyframes orbitFull {
+            0% {
+                transform: rotate(0deg) translateX(165px) rotate(0deg);
+                z-index: 3;
+                opacity: 1;
+            }
+            49% { z-index: 3; }
+            50% {
+                transform: rotate(180deg) translateX(165px) rotate(-180deg);
+                z-index: 1;
+                opacity: 0.45;
+            }
+            99% { z-index: 1; }
+            100% {
+                transform: rotate(360deg) translateX(165px) rotate(-360deg);
+                z-index: 3;
+                opacity: 1;
+            }
+        }
+
+        /* ===== RESPONSIVO MOBILE ===== */
+        @media (max-width: 768px) {
+            .team-img {
+                width: 200px;
+            }
+
+            .orbit {
+                font-size: 1rem;
+            }
+
+            .orbit-1 { animation: orbitMobile 6s linear infinite 0s; }
+            .orbit-2 { animation: orbitMobile 6s linear infinite -1.5s; }
+            .orbit-3 { animation: orbitMobile 6s linear infinite -3s; }
+            .orbit-4 { animation: orbitMobile 6s linear infinite -4.5s; }
+
+            @keyframes orbitMobile {
+                0%   { transform: rotate(0deg) translateX(100px) rotate(0deg); z-index: 3; opacity: 1; }
+                49%  { z-index: 3; }
+                50%  { transform: rotate(180deg) translateX(100px) rotate(-180deg); z-index: 1; opacity: 0.45; }
+                99%  { z-index: 1; }
+                100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); z-index: 3; opacity: 1; }
+            }
+        }
+        .partner-item:hover { transform: scale(1.07); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .partner-item span { display: block; font-size: 2rem; margin-bottom: 0.3rem; }
+
+        /* ============================================
+           SORTEIO
+           ============================================ */
+        #lottery {
+            background: linear-gradient(160deg, #2d1a5e 0%, var(--dark) 100%);
+            position: relative; overflow: hidden;
+        }
+        .stars-bg {
+            position: absolute; inset: 0; z-index: 0;
+            background-image:
+                radial-gradient(1.5px 1.5px at 15% 25%, var(--accent), transparent),
+                radial-gradient(1.5px 1.5px at 40% 10%, #fff, transparent),
+                radial-gradient(2px 2px at 65% 40%, var(--accent), transparent),
+                radial-gradient(1px 1px at 80% 15%, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 25% 70%, var(--accent), transparent),
+                radial-gradient(2px 2px at 55% 80%, #fff, transparent),
+                radial-gradient(1px 1px at 90% 60%, var(--accent), transparent),
+                radial-gradient(1.5px 1.5px at 10% 90%, #fff, transparent),
+                radial-gradient(2px 2px at 70% 70%, var(--accent), transparent),
+                radial-gradient(1px 1px at 35% 55%, #fff, transparent);
+            background-size: 300px 300px;
+            animation: twinkle 3s ease-in-out infinite alternate;
+        }
+        @keyframes twinkle {
+            0%   { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+        #lottery .section-wrap { position: relative; z-index: 2; }
+        #lottery .section-title {
+            color: var(--accent);
+            text-shadow: 0 0 30px rgba(255,215,0,0.4);
+        }
+        #lottery .section-sub { color: #c9bfff; }
+        .chest-wrap {
+            width: 180px; margin: 0 auto 2rem;
+        }
+        .chest-lid-anim {
+            transform-origin: bottom center;
+            animation: lid-open 3s ease-in-out infinite;
+        }
+        @keyframes lid-open {
+            0%,100% { transform: rotate(0deg); }
+            45%,55%  { transform: rotate(-28deg); }
+        }
+        .month-row {
+            display: flex; justify-content: center;
+            gap: 2rem; flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+        .month-box {
+            padding: 1.8rem 2.5rem; border-radius: var(--radius);
+            text-align: center; min-width: 180px;
+        }
+        .month-box.locked {
+            background: rgba(255,255,255,0.08);
+            border: 2px dashed rgba(255,255,255,0.2);
+            color: #aaa;
+        }
+        .month-box.locked .month-num { color: #888; }
+        .month-box.unlocked {
+            background: linear-gradient(135deg, var(--accent), #ffb300);
+            border: 2px solid var(--accent);
+            color: var(--dark);
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+            animation: glow-pulse 2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%,100% { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+            50%      { box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+        .month-num {
+            font-size: 2rem; font-weight: 900;
+            display: block; margin-bottom: 0.3rem;
+        }
+        .month-label { font-size: 0.85rem; font-weight: 700; }
+        .btn-lottery {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #ffb300);
+            color: var(--dark); padding: 1rem 2.5rem;
+            border-radius: 50px; font-weight: 800; font-size: 1.1rem;
+            box-shadow: 0 6px 24px rgba(255,215,0,0.4);
+            transition: var(--transition);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .btn-lottery:hover { transform: scale(1.06); }
+
+        /* ============================================
+           SOBRE NÓS
+           ============================================ */
+        #about {     
+            padding: 50px 20px 80px 20px; /* ← Aumente o primeiro valor (topo) */
+            background: #fff;   ; }
+        .about-text {
+            max-width: 780px; margin: 0 auto 3rem;
+            font-size: 1.05rem; color: #444; text-align: center;
+            line-height: 1.85;
+        }
+        .values-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 1.5rem;
+        }
+        .value-card {
+            background: var(--white); border-radius: var(--radius);
+            padding: 2rem 1.5rem; text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+        }
+        .value-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+        .value-card:nth-child(1) { border-top-color: var(--primary); }
+        .value-card:nth-child(2) { border-top-color: var(--secondary); }
+        .value-card:nth-child(3) { border-top-color: var(--accent); }
+        .value-icon { font-size: 2.8rem; margin-bottom: 0.8rem; }
+        .value-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--dark); }
+        .value-card p { color: #666; font-size: 0.92rem; }
+
+        /* ============================================
+           FAQ
+           ============================================ */
+        #faq { background: var(--white); }
+        .faq-list { max-width: 780px; margin: 0 auto; }
+        .faq-item {
+            background: var(--bg); border-radius: var(--radius);
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .faq-q {
+            width: 100%; background: none; border: none;
+            padding: 1.3rem 1.8rem; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Nunito', sans-serif; font-size: 1rem;
+            font-weight: 700; color: var(--dark);
+            text-align: left; transition: background 0.2s;
+        }
+        .faq-q:hover { background: rgba(255,107,0,0.05); }
+        .faq-icon {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--primary); color: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; font-weight: 900; flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+        .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--secondary); }
+        .faq-a {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(.4,0,.2,1), padding 0.3s;
+            padding: 0 1.8rem;
+        }
+        .faq-a-inner { padding: 0 0 1.3rem; color: #555; font-size: 0.97rem; line-height: 1.75; }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        #footer {
+            background: var(--dark); color: rgba(255,255,255,0.85);
+            padding: 4rem 2rem 2rem;
+        }
+        .footer-grid {
+            max-width: 1200px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 2.5rem; margin-bottom: 3rem;
+        }
+        .footer-logo {
+            font-size: 1.6rem; font-weight: 250;
+            color: var(--primary); margin-bottom: 0.8rem;
+        }
+        .footer-col h4 {
+            color: var(--accent); font-size: 1rem;
+            font-weight: 800; margin-bottom: 1rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .footer-col p, .footer-col a {
+            display: block; color: rgba(255,255,255,0.7);
+            font-size: 0.9rem; margin-bottom: 0.5rem;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--primary); }
+        .footer-divider {
+            max-width: 1200px; margin: 0 auto 1.5rem;
+            border: none; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-bottom {
+            max-width: 1200px; margin: 0 auto;
+        }
+        .seals-row {
+            display: flex; justify-content: center;
+            gap: 2rem; flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .seal {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50px; padding: 0.45rem 1.1rem;
+            font-size: 0.85rem; font-weight: 700;
+            color: rgba(255,255,255,0.8);
+        }
+        .payment-row {
+            display: flex; justify-content: center;
+            gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+        }
+        .pay-badge {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px; padding: 0.4rem 0.9rem;
+            font-size: 0.82rem; font-weight: 700;
+            color: rgba(255,255,255,0.7);
+        }
+        .disclaimer {
+            font-size: 0.75rem; color: rgba(255,255,255,0.4);
+            text-align: center; max-width: 800px;
+            margin: 0 auto 1.2rem; line-height: 1.6;
+        }
+        .copyright {
+            text-align: center; font-size: 0.85rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* ============================================
+           KEYFRAMES GLOBAIS
+           ============================================ */
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50%      { transform: scale(1.04); }
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-12px); }
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .reveal {
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.22s; }
+        .reveal-delay-3 { transition-delay: 0.34s; }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 900px) {
+            .nav-links, .btn-nav { display: none; }
+            .hamburger { display: flex; }
+        }
+        @media (max-width: 600px) {
+            .hero-title { font-size: 1.6rem; }
+            .hero-badges { flex-direction: column; align-items: center; }
+            .month-row { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ====================================================
+     NAVBAR
+     ==================================================== -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <!-- Substitua a linha do logo por isso -->
+        <div class="logo">
+            <img src="assets/LOGO PRINCIPAL - SEM FUNDO.webp" alt="Ali+ Club" class="nav-logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#hero">Início</a></li>
+            <li><a href="#how-it-works">Como Funciona</a></li>
+            <li><a href="#partners">Parceiros</a></li>
+            <li><a href="#lottery">Sorteios</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <!-- SUBSTITUIR href pelo link de pagamento real -->
+        <a href="#" class="btn-nav">Assinar agora 🚀</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#hero">Início</a>
+        <a href="#how-it-works">Como Funciona</a>
+        <a href="#partners">Parceiros</a>
+        <a href="#lottery">Sorteios</a>
+        <a href="#about">Sobre Nós</a>
+        <a href="#faq">FAQ</a>
+    </div>
+</nav>
+
+<!-- ====================================================
+     FAIXA 1: HERO
+     ==================================================== -->
+<section id="hero">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="hero-content">
+
+        <!-- Mascote SVG cartoon -->
+       <!-- Mascote - Imagem da pasta assets -->
+        <div class="mascot-wrap">
+            <img 
+                src="assets/LOGO PRINCIPAL - SEM FUNDO.webp" 
+                alt="Mascote Ali+ Club" 
+                class="mascot-img"
+            />
+        </div>
+
+        <h1 class="hero-title">Vantagens reais todo dia e<br>prêmios incríveis todo mês!</h1>
+        <p class="hero-sub">Faça parte do Ali+ Club por apenas <strong>R$ 19,90 mensais</strong>.<br>Economize nas suas lojas favoritas e concorra a sorteios exclusivos.</p>
+
+        <!-- SUBSTITUIR href pelo link de pagamento real -->
+        <a href="#" class="btn-hero">Quero ser Ali+ agora! 🚀</a>
+
+        <div class="hero-badges">
+            <span class="hero-badge">✅ Desconto Imediato</span>
+            <span class="hero-badge">🎰 Sorteios Mensais</span>
+            <span class="hero-badge">💛 Fácil de Cancelar</span>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================
+     FAIXA 2: COMO FUNCIONA
+     ==================================================== -->
+<section id="how-it-works">
+    <div class="section-wrap">
+        <h2 class="section-title reveal">Veja como é fácil ganhar com o Ali+ Club:</h2>
+        <p class="section-sub reveal reveal-delay-1">Três passos simples para você economizar e concorrer a prêmios.</p>
+        <div class="steps-grid">
+
+            <!-- Passo 1 -->
+            <div class="step-card reveal reveal-delay-1">
+                <div class="step-num">1</div>
+                <div class="step-icon-wrap">
+                    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Celular -->
+                        <rect x="15" y="5" width="30" height="50" rx="6" fill="#6C3FC5" stroke="#fff" stroke-width="2"/>
+                        <rect x="18" y="12" width="24" height="32" rx="3" fill="#fff"/>
+                        <circle cx="30" cy="51" r="3" fill="#FFD700"/>
+                        <!-- Checkmark na tela -->
+                        <circle cx="30" cy="28" r="10" fill="#FF6B00"/>
+                        <path d="M24 28 L28 32 L36 22" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Assine e Economize</h3>
+                <p>Por apenas <strong>R$ 19,90/mês</strong>, você entra para o clube e já libera acesso imediato a descontos em dezenas de lojas parceiras.</p>
+            </div>
+
+            <!-- Passo 2 -->
+            <div class="step-card reveal reveal-delay-2">
+                <div class="step-num">2</div>
+                <div class="step-icon-wrap">
+                    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Sacola de compras -->
+                        <path d="M10 22 L8 52 L52 52 L50 22 Z" fill="#FF6B00" stroke="#fff" stroke-width="2"/>
+                        <path d="M20 22 Q20 10 30 10 Q40 10 40 22" stroke="#6C3FC5" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <!-- Símbolo % -->
+                        <circle cx="23" cy="35" r="4" fill="#FFD700"/>
+                        <circle cx="37" cy="42" r="4" fill="#FFD700"/>
+                        <line x1="20" y1="45" x2="40" y2="30" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Continue com a Gente</h3>
+                <p>A fidelidade aqui vale muito! Ao renovar sua assinatura para o <strong>segundo mês</strong>, você sobe de nível e desbloqueia ainda mais benefícios.</p>
+            </div>
+
+            <!-- Passo 3 -->
+            <div class="step-card reveal reveal-delay-3">
+                <div class="step-num">3</div>
+                <div class="step-icon-wrap">
+                    <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Globo de sorteio -->
+                        <circle cx="30" cy="30" r="22" fill="#6C3FC5" stroke="#FFD700" stroke-width="3"/>
+                        <ellipse cx="30" cy="30" rx="11" ry="22" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+                        <line x1="8" y1="30" x2="52" y2="30" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+                        <!-- Estrela central -->
+                        <polygon points="30,18 33,26 42,26 35,32 38,41 30,35 22,41 25,32 18,26 27,26" fill="#FFD700"/>
+                        <!-- Base -->
+                        <rect x="24" y="52" width="12" height="6" rx="3" fill="#FF6B00"/>
+                    </svg>
+                </div>
+                <h3>Concorra a Prêmios</h3>
+                <p>A partir do <strong>2º mês</strong>, você ganha automaticamente o seu <strong>Número da Sorte</strong> para participar dos nossos sorteios mensais exclusivos.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================
+     FAIXA 3: PARCEIROS
+     ==================================================== -->
+<section id="partners">
+    <div class="section-wrap">
+        <h2 class="section-title reveal">Onde você vai usar seus descontos hoje?</h2>
+        <p class="section-sub reveal reveal-delay-1">Compre nas maiores marcas do Brasil pagando menos. O valor da assinatura volta para você em economia!</p>
+    </div>
+    <div class="carousel-outer">
+        <div class="carousel-track">
+            <!-- Conjunto 1 -->
+            <div class="partner-item"><span>🏥</span>Farmácias</div>
+            <div class="partner-item"><span>🛒</span>Supermercados</div>
+            <div class="partner-item"><span>⛽</span>Postos</div>
+            <div class="partner-item"><span>👕</span>Moda &amp; Roupas</div>
+            <div class="partner-item"><span>📱</span>Eletrônicos</div>
+            <div class="partner-item"><span>🍽️</span>Restaurantes</div>
+            <div class="partner-item"><span>💪</span>Academias</div>
+            <div class="partner-item"><span>🎬</span>Cinemas</div>
+            <div class="partner-item"><span>✈️</span>Viagens</div>
+            <div class="partner-item"><span>📚</span>Livrarias</div>
+            <!-- Conjunto 2 (loop infinito) -->
+            <div class="partner-item"><span>🏥</span>Farmácias</div>
+            <div class="partner-item"><span>🛒</span>Supermercados</div>
+            <div class="partner-item"><span>⛽</span>Postos</div>
+            <div class="partner-item"><span>👕</span>Moda &amp; Roupas</div>
+            <div class="partner-item"><span>📱</span>Eletrônicos</div>
+            <div class="partner-item"><span>🍽️</span>Restaurantes</div>
+            <div class="partner-item"><span>💪</span>Academias</div>
+            <div class="partner-item"><span>🎬</span>Cinemas</div>
+            <div class="partner-item"><span>✈️</span>Viagens</div>
+            <div class="partner-item"><span>📚</span>Livrarias</div>
+        </div>
+    </div>
+    <div style="height:2rem"></div>
+</section>
+
+<!-- ====================================================
+     FAIXA 4: SORTEIO
+     ==================================================== -->
+<section id="lottery">
+    <div class="stars-bg"></div>
+    <div class="section-wrap" style="text-align:center">
+
+        <!-- Baú de Tesouro Animado -->
+        <div class="chest-wrap reveal">
+            <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg">
+                <!-- Moedas saindo -->
+                <circle cx="85" cy="60" r="8" fill="#FFD700" opacity="0.9"/>
+                <circle cx="105" cy="48" r="6" fill="#FFD700" opacity="0.7"/>
+                <circle cx="120" cy="62" r="7" fill="#FFD700" opacity="0.8"/>
+                <circle cx="75" cy="72" r="5" fill="#FFD700" opacity="0.6"/>
+                <!-- Base do baú -->
+                <rect x="20" y="100" width="160" height="65" rx="12" fill="#8B4513" stroke="#5D2E0C" stroke-width="3"/>
+                <!-- Dobradiça e reforços -->
+                <rect x="20" y="100" width="160" height="12" rx="2" fill="#A0522D"/>
+                <rect x="88" y="100" width="24" height="65" fill="#A0522D" opacity="0.4"/>
+                <!-- Fechadura -->
+                <rect x="86" y="118" width="28" height="20" rx="5" fill="#FFD700" stroke="#FF6B00" stroke-width="2"/>
+                <circle cx="100" cy="125" r="5" fill="#FF6B00"/>
+                <!-- Pés do baú -->
+                <rect x="28" y="158" width="16" height="8" rx="4" fill="#5D2E0C"/>
+                <rect x="156" y="158" width="16" height="8" rx="4" fill="#5D2E0C"/>
+                <!-- Tampa (animada) -->
+                <g class="chest-lid-anim">
+                    <rect x="20" y="76" width="160" height="30" rx="12" fill="#A0522D" stroke="#5D2E0C" stroke-width="3"/>
+                    <rect x="20" y="97" width="160" height="9" fill="#8B4513" opacity="0.5"/>
+                    <!-- Arco da tampa -->
+                    <path d="M20 85 Q100 55 180 85" fill="#C4682A" stroke="#5D2E0C" stroke-width="2"/>
+                    <!-- Metal decorativo -->
+                    <rect x="35" y="80" width="130" height="6" rx="3" fill="#FFD700" opacity="0.8"/>
+                    <!-- Estrelas decorativas -->
+                    <polygon points="60,86 62,92 68,92 63,96 65,102 60,98 55,102 57,96 52,92 58,92" fill="#FFD700" transform="scale(0.6) translate(38,32)"/>
+                    <polygon points="140,86 142,92 148,92 143,96 145,102 140,98 135,102 137,96 132,92 138,92" fill="#FFD700" transform="scale(0.6) translate(-22,32)"/>
+                </g>
+            </svg>
+        </div>
+
+        <h2 class="section-title reveal">O seu Número da Sorte está logo ali!</h2>
+        <p class="section-sub reveal reveal-delay-1">Para garantir a justiça e a segurança dos nossos sorteios, seu Número da Sorte é liberado a partir do seu <strong>segundo mês</strong> de assinatura ativa. É a nossa forma de premiar quem realmente está com a gente nessa jornada!</p>
+
+        <div class="month-row reveal reveal-delay-2">
+            <div class="month-box locked">
+                <span class="month-num">🔒</span>
+                <strong>MÊS 1</strong>
+                <div class="month-label">Período de Boas-Vindas</div>
+                <div class="month-label">Acesso imediato a descontos em lojas parceiras.</div>
+            </div>
+            <div class="month-box unlocked">
+                <span class="month-num">⭐</span>
+                <strong>MÊS 2+</strong>
+                <div class="month-label">Número da Sorte Liberado!</div>
+                <div class="month-label">Participação em sorteios exclusivos.</div>
+            </div>
+        </div>
+
+        <!-- SUBSTITUIR href pelo link de pagamento real -->
+        <a href="#" class="btn-lottery reveal reveal-delay-3">Garantir minha vaga no próximo sorteio 🎯</a>
+    </div>
+</section>
+
+<!-- ====================================================
+     FAIXA 5: SOBRE NÓS
+     ==================================================== -->
+<section id="about">
+    <div class="section-wrap">
+        <!-- Ilustração equipe - Imagem com animação -->
+    <div style="text-align:center; margin-bottom:2rem" class="reveal">
+        <div class="team-img-wrapper">
+            <img 
+                src="assets/SÍMBOLO - SEM FUNDO.webp" 
+                alt="Ali+ Club - Nossa Equipe" 
+                class="team-img"
+            />
+            <!-- Partículas decorativas ao redor -->
+            <span class="orbit orbit-1">⭐</span>
+            <span class="orbit orbit-2">💎</span>
+            <span class="orbit orbit-3">✨</span>
+            <span class="orbit orbit-4">🏆</span>
+        </div>
+    </div>
+
+        <h2 class="section-title reveal">Muito prazer, nós somos o Ali+ Club!</h2>
+        <p class="about-text reveal reveal-delay-1">
+            O Ali+ Club é uma empresa brasileira, fundada por empreendedores comprometidos com a <strong>ética, a transparência e a inovação</strong> nos negócios.<br><br>
+            Somos um clube de benefícios que tem por princípio a busca de relações onde todos saem ganhando. O Ali+ Club já nasce <strong>100% digital</strong>, utilizando tecnologia inteligente para conectar você às melhores marcas do mercado em um ambiente seguro, favorável e justo.<br><br>
+            Nosso propósito é chegar a lares de todo o Brasil para <strong>transformar vidas, realizar sonhos</strong> e levar esperança, diversão e vantagens reais para o seu dia a dia.<br><br>
+            <em>Abra a porta para as boas oportunidades, venha para o Ali+ Club!</em>
+        </p>
+
+        <div class="values-row">
+            <div class="value-card reveal reveal-delay-1">
+                <div class="value-icon">⚖️</div>
+                <h3>Ética</h3>
+                <p>Comprometidos com práticas justas e transparentes em cada decisão que tomamos.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-2">
+                <div class="value-icon">🔍</div>
+                <h3>Transparência</h3>
+                <p>Clareza total nas regras, nos sorteios e em todas as relações com nossos membros.</p>
+            </div>
+            <div class="value-card reveal reveal-delay-3">
+                <div class="value-icon">💡</div>
+                <h3>Inovação</h3>
+                <p>Tecnologia a favor do brasileiro, conectando você às melhores oportunidades do mercado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================
+     FAIXA 6: FAQ
+     ==================================================== -->
+<section id="faq">
+    <div class="section-wrap">
+        <div style="text-align:center;margin-bottom:1rem" class="reveal">
+            <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="36" fill="#6C3FC5"/>
+                <circle cx="40" cy="36" r="18" fill="#FFD700" stroke="#FF6B00" stroke-width="2"/>
+                <circle cx="40" cy="36" r="8" fill="#6C3FC5"/>
+                <text x="40" y="41" text-anchor="middle" font-family="Nunito,sans-serif" font-size="14" font-weight="900" fill="#fff">?</text>
+                <rect x="32" y="56" width="16" height="6" rx="3" fill="#FF6B00"/>
+            </svg>
+        </div>
+        <h2 class="section-title reveal">Dúvidas Frequentes</h2>
+        <p class="section-sub reveal reveal-delay-1">Encontre respostas rápidas para as perguntas mais comuns.</p>
+
+        <div class="faq-list">
+
+            <div class="faq-item reveal reveal-delay-1">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Como funcionam os descontos?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-a">
+                    <div class="faq-a-inner">
+                        Os descontos são aplicados diretamente nas lojas parceiras. Após se tornar membro Ali+, você recebe seu <strong>código ou link exclusivo</strong>. Ao usá-lo no checkout das lojas parceiras, o desconto é aplicado automaticamente no valor final da sua compra. Simples assim!
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal reveal-delay-2">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Por que só participo do sorteio a partir do 2º mês?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-a">
+                    <div class="faq-a-inner">
+                        Adotamos esta política para <strong>garantir a integridade e a segurança</strong> dos nossos sorteios. Este mecanismo previne fraudes e assegura que apenas membros genuinamente comprometidos com o clube participem. É a nossa forma de premiar quem realmente acredita no Ali+ Club e está com a gente na jornada!
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal reveal-delay-3">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Como posso cancelar minha assinatura?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-a">
+                    <div class="faq-a-inner">
+                        O cancelamento é <strong>simples e sem burocracia</strong>. Pode ser feito a qualquer momento diretamente pelo seu painel de membro no nosso site, ou entrando em contato com nosso suporte. Após o cancelamento, seu acesso permanece ativo até o final do período já pago.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item reveal">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Como recebo meu Número da Sorte?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-a">
+                    <div class="faq-a-inner">
+                        Após a confirmação da renovação do seu <strong>2º mês de assinatura</strong>, seu Número da Sorte único é gerado automaticamente pelo sistema e enviado para o <strong>e-mail cadastrado</strong>. Ele também fica disponível a qualquer momento no seu painel de membro. Guarde-o com carinho — ele pode ser o ganhador do próximo sorteio! 🍀
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================
+     FAIXA 7: FOOTER
+     ==================================================== -->
+<footer id="footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <div class="footer-logo">Ali+ ✨ Club</div>
+            <p>Descontos reais e prêmios mensais para você e sua família. 100% digital, 100% brasileiro.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Links Rápidos</h4>
+            <a href="#how-it-works">Como Funciona</a>
+            <a href="#partners">Parceiros</a>
+            <a href="#lottery">Sorteios</a>
+            <a href="#about">Sobre Nós</a>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <!-- CRIAR PÁGINAS SEPARADAS PARA ESSES LINKS -->
+            <a href="#">Termos de Uso</a>
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Regulamento dos Sorteios</a>
+            <a href="#">LGPD – Proteção de Dados</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contato &amp; Suporte</h4>
+            <!-- SUBSTITUIR PELOS E-MAILS REAIS -->
+            <p>📧 contato@alimaisclub.com.br</p>
+            <p>🛠️ suporte@alimaisclub.com.br</p>
+            <p>🕐 Seg–Sex • 9h às 18h</p>
+        </div>
+    </div>
+
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+        <!-- PREENCHER COM DADOS REAIS APÓS CONSTITUIÇÃO DA EMPRESA E OBTENÇÃO DAS AUTORIZAÇÕES -->
+        <p class="disclaimer">
+            CNPJ: 00.000.000/0001-00 &nbsp;|&nbsp; Endereço: [Endereço Completo da Empresa] &nbsp;|&nbsp;
+            Autorização SRE/ME Nº: [INSERIR APÓS OBTENÇÃO JUNTO À SEAE/MF] &nbsp;|&nbsp;
+            Os sorteios são realizados em conformidade com a legislação vigente (Lei nº 5.768/71 e Decreto nº 70.951/72).
+            As informações e condições de participação estão disponíveis no Regulamento dos Sorteios.
+        </p>
+        <p class="copyright">© 2025 Ali+ Club. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- ====================================================
+     JAVASCRIPT
+     ==================================================== -->
+<script>
+    /* ----------------------------------------
+       1. CONFETTI ANIMADO (CANVAS)
+    ---------------------------------------- */
+    const canvas  = document.getElementById('confetti-canvas');
+    const ctx     = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const COLORS  = ['#FF6B00','#6C3FC5','#FFD700','#FF4560','#00E396','#fff'];
+    const SHAPES  = ['square','circle','triangle'];
+    const TOTAL   = 120;
+    const pieces  = [];
+
+    for (let i = 0; i < TOTAL; i++) {
+        pieces.push({
+            x:     Math.random() * canvas.width,
+            y:     Math.random() * canvas.height - canvas.height,
+            vx:    (Math.random() - 0.5) * 2.5,
+            vy:    Math.random() * 2.5 + 1.2,
+            size:  Math.random() * 8 + 4,
+            color: COLORS[Math.floor(Math.random() * COLORS.length)],
+            shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+            rot:   Math.random() * Math.PI * 2,
+            rotV:  (Math.random() - 0.5) * 0.12
+        });
+    }
+
+    function drawPiece(p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        if (p.shape === 'circle') {
+            ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+        } else if (p.shape === 'triangle') {
+            ctx.moveTo(0, -p.size / 2);
+            ctx.lineTo(p.size / 2, p.size / 2);
+            ctx.lineTo(-p.size / 2, p.size / 2);
+            ctx.closePath();
+        } else {
+            ctx.rect(-p.size / 2, -p.size / 2, p.size, p.size);
+        }
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+            p.x   += p.vx;
+            p.y   += p.vy;
+            p.rot += p.rotV;
+            if (p.y > canvas.height + 10) {
+                p.y  = -10;
+                p.x  = Math.random() * canvas.width;
+            }
+            drawPiece(p);
+        });
+        requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+
+    /* ----------------------------------------
+       2. NAVBAR — SOMBRA NO SCROLL
+    ---------------------------------------- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    /* ----------------------------------------
+       3. MENU HAMBURGUER
+    ---------------------------------------- */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+    });
+
+    // Fecha menu ao clicar em link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('open');
+        });
+    });
+
+    /* ----------------------------------------
+       4. FAQ ACCORDION
+    ---------------------------------------- */
+    function toggleFaq(btn) {
+        const item   = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+
+        // Fecha todos
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+            el.classList.remove('open');
+            el.querySelector('.faq-a').style.maxHeight = null;
+        });
+
+        // Abre o clicado (se estava fechado)
+        if (!isOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+    }
+
+    /* ----------------------------------------
+       5. SCROLL REVEAL (IntersectionObserver)
+    ---------------------------------------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* ----------------------------------------
+       6. RASTREAMENTO DE EVENTOS NOS CTAs
+       Descomente após configurar Meta Pixel e GA4
+    ---------------------------------------- */
+    /*
+    document.querySelectorAll('.btn-hero, .btn-nav, .btn-lottery').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Meta Pixel
+            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            // GA4
+            if (typeof gtag !== 'undefined') gtag('event', 'cta_click', { event_category: 'conversao' });
+        });
+    });
+    */
+</script>
+
+</body>
+</html>
