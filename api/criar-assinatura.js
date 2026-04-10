@@ -1,6 +1,6 @@
 // Arquivo: api/criar-assinatura.js
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
     // ============================================================================
     // CONFIGURAÇÃO DE CORS (Permite que o frontend acesse esta API na Vercel)
     // ============================================================================
@@ -25,12 +25,11 @@ export default async function handler(req, res) {
     // ============================================================================
     // VARIÁVEIS DE AMBIENTE
     // ============================================================================
-    // Na Vercel, você vai configurar isso no painel: Settings > Environment Variables
     const ASAAS_API_URL = process.env.ASAAS_API_URL || 'https://sandbox.asaas.com/api/v3';
     const ASAAS_API_KEY = process.env.ASAAS_API_KEY;
 
     if (!ASAAS_API_KEY) {
-        console.error("⚠️ ERRO: Chave da API do Asaas não configurada nas variáveis de ambiente.");
+        console.error("⚠️ ERRO: Chave da API do Asaas não configurada nas variáveis de ambiente da Vercel.");
         return res.status(500).json({ error: 'Erro de configuração do servidor.' });
     }
 
@@ -187,4 +186,4 @@ export default async function handler(req, res) {
         console.error("🔥 Erro interno no servidor:", error);
         return res.status(500).json({ error: 'Erro interno no servidor ao processar a requisição.' });
     }
-}
+};
