@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo! - Ali+ Club</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary:    #00CBC0;
+            --secondary:  #005A9E;
+            --accent:     #FFD700;
+            --bg:         #FFF8F0;
+            --dark:       #1A1A2E;
+            --white:      #ffffff;
+            --radius:     20px;
+            --shadow:     0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, #e0f7f5 100%);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .success-container {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 550px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Linha decorativa no topo */
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        /* Ícone Animado */
+        .icon-wrapper {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), #0094B1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 10px 25px rgba(0, 203, 192, 0.4);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .icon-wrapper svg {
+            width: 45px;
+            height: 45px;
+            color: var(--white);
+            animation: checkmark 0.8s ease-in-out forwards 0.4s;
+            opacity: 0;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes checkmark {
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background-color: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 1rem;
+            color: #665600;
+            font-weight: 600;
+        }
+
+        .buttons-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #ffb300);
+            color: var(--dark);
+            padding: 16px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 800;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: 2px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        /* Confetes de fundo */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+        }
+
+        @media (max-width: 600px) {
+            .success-container { padding: 40px 25px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Elementos decorativos (Confetes) -->
+    <div class="confetti" style="top: 10%; left: 10%; background: #FF6B00; animation: popIn 1s ease forwards 0.5s;"></div>
+    <div class="confetti" style="top: 20%; right: 15%; background: var(--primary); animation: popIn 1s ease forwards 0.7s; border-radius: 50%;"></div>
+    <div class="confetti" style="bottom: 15%; left: 20%; background: var(--accent); animation: popIn 1s ease forwards 0.6s;"></div>
+    <div class="confetti" style="bottom: 25%; right: 10%; background: var(--secondary); animation: popIn 1s ease forwards 0.8s; border-radius: 50%;"></div>
+
+    <div class="success-container">
+        
+        <div class="icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+
+        <h1>Parabéns!<br>Você agora é Ali+</h1>
+        
+        <p>Sua assinatura foi confirmada com sucesso e seus benefícios já estão liberados.</p>
+
+        <div class="highlight-box">
+            <p>📧 Enviamos todos os detalhes de acesso e os próximos passos para o seu e-mail. (Verifique também a caixa de spam!)</p>
+        </div>
+
+        <div class="buttons-wrapper">
+            <!-- Substitua o link abaixo pelo link da sua plataforma de membros -->
+            <a href="#" class="btn-primary">Acessar minha conta 🚀</a>
+            
+            <!-- Substitua o link abaixo pelo link da sua página inicial -->
+            <a href="index.html" class="btn-secondary">Voltar ao site</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
