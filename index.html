@@ -829,41 +829,171 @@
 </section>
 
 <!-- ====================================================
-     FAIXA 3: PARCEIROS
+     FAIXA 3: PARCEIROS (SISTEMA DE SCROLL INFINITO PRO)
      ==================================================== -->
-<section id="partners">
-    <div class="section-wrap">
-        <h2 class="section-title reveal">Onde você vai usar seus descontos hoje?</h2>
-        <p class="section-sub reveal reveal-delay-1">Compre nas maiores marcas do Brasil pagando menos. O valor da assinatura volta para você em economia!</p>
+<style>
+    /* 1. O "Palco" (Wrapper): Fica parado e segura as sombras */
+    .partners-stage {
+        position: relative;
+        width: 100%;
+        background: var(--dark);
+        padding: 60px 0;
+        overflow: hidden; /* Trava o site para não dar scroll lateral na página */
+    }
+
+    /* Sombras Laterais FIXAS (Não se movem NUNCA) */
+    .partners-stage::before,
+    .partners-stage::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 150px; /* Largura da sombra */
+        z-index: 10;
+        pointer-events: none; /* Permite clicar através da sombra */
+    }
+    .partners-stage::before {
+        left: 0;
+        background: linear-gradient(to right, var(--dark) 20%, transparent);
+    }
+    .partners-stage::after {
+        right: 0;
+        background: linear-gradient(to left, var(--dark) 20%, transparent);
+    }
+
+    /* 2. A "Janela" de Interação: Onde o usuário arrasta */
+    .carousel-viewport {
+        overflow-x: auto;
+        cursor: grab;
+        user-select: none;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE */
+        display: flex;
+        padding: 20px 0;
+    }
+    .carousel-viewport::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+    .carousel-viewport:active { cursor: grabbing; }
+
+    /* 3. O Trilho: Contém as imagens duplicadas */
+    .carousel-rail {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+    }
+
+    .partner-card {
+        width: 195px;
+        height: 195px;
+        margin: 0 12px;
+        border-radius: 15px;
+        overflow: hidden; 
+        flex-shrink: 0;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        background: #000;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .partner-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover !important; 
+        display: block;
+        pointer-events: none; /* Impede o navegador de tentar "puxar" a imagem */
+    }
+
+    /* Estilo dos textos */
+    .partners-header { text-align: center; margin-bottom: 40px; padding: 0 20px; }
+    .partners-header h2 { color: #fff; font-weight: 800; font-size: 2rem; margin-bottom: 10px; }
+    .partners-header p { color: #888; font-size: 1rem; }
+</style>
+
+<section class="partners-stage">
+    <div class="partners-header">
+        <h2 class="reveal">Onde você vai usar seus descontos hoje?</h2>
+        <p class="reveal">Arraste para os lados para explorar nossos parceiros.</p>
     </div>
-    <div class="carousel-outer">
-        <div class="carousel-track">
-            <!-- Conjunto 1 -->
-            <div class="partner-item"><span>🏥</span>Farmácias</div>
-            <div class="partner-item"><span>🛒</span>Supermercados</div>
-            <div class="partner-item"><span>⛽</span>Postos</div>
-            <div class="partner-item"><span>👕</span>Moda &amp; Roupas</div>
-            <div class="partner-item"><span>📱</span>Eletrônicos</div>
-            <div class="partner-item"><span>🍽️</span>Restaurantes</div>
-            <div class="partner-item"><span>💪</span>Academias</div>
-            <div class="partner-item"><span>🎬</span>Cinemas</div>
-            <div class="partner-item"><span>✈️</span>Viagens</div>
-            <div class="partner-item"><span>📚</span>Livrarias</div>
-            <!-- Conjunto 2 (loop infinito) -->
-            <div class="partner-item"><span>🏥</span>Farmácias</div>
-            <div class="partner-item"><span>🛒</span>Supermercados</div>
-            <div class="partner-item"><span>⛽</span>Postos</div>
-            <div class="partner-item"><span>👕</span>Moda &amp; Roupas</div>
-            <div class="partner-item"><span>📱</span>Eletrônicos</div>
-            <div class="partner-item"><span>🍽️</span>Restaurantes</div>
-            <div class="partner-item"><span>💪</span>Academias</div>
-            <div class="partner-item"><span>🎬</span>Cinemas</div>
-            <div class="partner-item"><span>✈️</span>Viagens</div>
-            <div class="partner-item"><span>📚</span>Livrarias</div>
+
+    <div class="carousel-viewport" id="viewport">
+        <div class="carousel-rail" id="rail">
+            <!-- O conteúdo será duplicado via JS para garantir o infinito perfeito sem erro de digitação -->
+            <div class="partner-card"><img src="assets/centaurologo.webp" alt="Centauro" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/electroluxlogo.webp" alt="Electrolux" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/amazonlogo.webp" alt="Amazon" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/netshoeslogo.webp" alt="Netshoes" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/magalulogo.webp" alt="Magalu" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/boticariologo.jpg" alt="Boticário" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/cealogo.webp" alt="Cea" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/rennerlogo.webp" alt="Renner" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/kabum_logo.webp" alt="Kabum" class="partner-img"></div>
+            <div class="partner-card"><img src="assets/casasbahialogo.webp" alt="Casa Bahia" class="partner-img"></div>
         </div>
     </div>
-    <div style="height:2rem"></div>
 </section>
+
+<script>
+    const viewport = document.getElementById('viewport');
+    const rail = document.getElementById('rail');
+
+    // 1. DUPLICAÇÃO AUTOMÁTICA (Garante o loop infinito no código)
+    const content = rail.innerHTML;
+    rail.innerHTML = content + content + content; // Triplicamos para ter margem de manobra no drag
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let scrollSpeed = 1; // Velocidade do auto-scroll
+    let isPaused = false;
+
+    // 2. MOVIMENTO AUTOMÁTICO VIA JS (Sincronizado com o scroll manual)
+    function autoPlay() {
+        if (!isDown && !isPaused) {
+            viewport.scrollLeft += scrollSpeed;
+            checkLoop();
+        }
+        requestAnimationFrame(autoPlay);
+    }
+
+    // 3. LÓGICA DE LOOP (O "Teletransporte" invisível)
+    function checkLoop() {
+        const half = rail.scrollWidth / 3; // Como triplicamos, o ponto de quebra é 1/3
+        if (viewport.scrollLeft >= half * 2) {
+            viewport.scrollLeft = half;
+        } else if (viewport.scrollLeft <= 0) {
+            viewport.scrollLeft = half;
+        }
+    }
+
+    // 4. EVENTOS DE ARRASTE (MOUSE)
+    viewport.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - viewport.offsetLeft;
+        scrollLeft = viewport.scrollLeft;
+    });
+
+    viewport.addEventListener('mouseleave', () => { isDown = false; });
+    viewport.addEventListener('mouseup', () => { isDown = false; });
+
+    viewport.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - viewport.offsetLeft;
+        const walk = (x - startX) * 2;
+        viewport.scrollLeft = scrollLeft - walk;
+        checkLoop();
+    });
+
+    // 5. PAUSA NO HOVER
+    viewport.addEventListener('mouseenter', () => { isPaused = true; });
+    viewport.addEventListener('mouseleave', () => { isPaused = false; });
+
+    // Inicia o sistema
+    // Começamos o scroll no meio para permitir drag para a esquerda logo de cara
+    window.onload = () => {
+        viewport.scrollLeft = rail.scrollWidth / 3;
+        autoPlay();
+    };
+</script>
 
 <!-- ====================================================
      FAIXA 4: SORTEIO
@@ -1076,9 +1206,9 @@
         <div class="footer-col">
             <h4>Contato &amp; Suporte</h4>
             <!-- SUBSTITUIR PELOS E-MAILS REAIS -->
-            <p>📧 contato@alimaisclub.com.br</p>
-            <p>🛠️ suporte@alimaisclub.com.br</p>
-            <p>🕐 Seg–Sex • 9h às 18h</p>
+            <p>📧 atendimento@alimaisclub.com.br</p>
+            <p>🛠️ (61)98245-9061</p>
+            <p>🕐 Seg–Sex • 9h às 17h</p>
         </div>
     </div>
 
@@ -1087,8 +1217,7 @@
     <div class="footer-bottom">
         <!-- PREENCHER COM DADOS REAIS APÓS CONSTITUIÇÃO DA EMPRESA E OBTENÇÃO DAS AUTORIZAÇÕES -->
         <p class="disclaimer">
-            CNPJ: 00.000.000/0001-00 &nbsp;|&nbsp; Endereço: [Endereço Completo da Empresa] &nbsp;|&nbsp;
-            Autorização SRE/ME Nº: [INSERIR APÓS OBTENÇÃO JUNTO À SEAE/MF] &nbsp;|&nbsp;
+            CNPJ: 53.609.627/0001-00 &nbsp;|&nbsp; Endereço: SHD Bloco K Lote 4 Brasília - DF - CEP: 73310-235 &nbsp;|&nbsp;
             Os sorteios são realizados em conformidade com a legislação vigente (Lei nº 5.768/71 e Decreto nº 70.951/72).
             As informações e condições de participação estão disponíveis no Regulamento dos Sorteios.
         </p>
